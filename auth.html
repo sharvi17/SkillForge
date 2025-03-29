@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillForge - Auth</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Remove Firebase Initialization from HTML -->
+    <script src="script.js" type="module"></script>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2 id="auth-title">Sign In</h2>
+            <form id="auth-form">
+                <input type="text" id="username" placeholder="Enter Username" required>
+                <input type="password" id="password" placeholder="Enter Password" required>
+                <button type="submit">Submit</button>
+            </form>
+            <p id="toggle-text">Don't have an account?
+                <a href="#" id="toggle-auth">Sign Up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="signup-container" style="display: none;">
+        <div class="auth-box">
+            <h2>Create New Account</h2>
+            <form id="signup-form">
+                <input type="text" id="signup-name" placeholder="Enter Name" required />
+                <input type="text" id="signup-location" placeholder="Enter Location" required />
+                <input type="email" id="signup-email" placeholder="Enter Email" required />
+                <input type="text" id="signup-gi-tag" placeholder="Enter GI Tag Number" required />
+                <input type="password" id="signup-password" placeholder="Enter Password" required />
+                <button type="submit">Signup</button>
+            </form>
+            <p>Already have an account?
+                <a href="#" id="toggle-login">Login</a>
+            </p>
+        </div>
+    </div>
+
+</body>
+
+</html>
