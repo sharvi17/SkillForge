@@ -1,0 +1,337 @@
+/* Global styles */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #ffe6e6;
+}
+
+/* Banner section with slight blur */
+.banner {
+    position: relative;
+    height: 70vh;
+    /* Covers more space */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Slightly blurred background */
+.banner::before {
+    content: "";
+    background: url('assets\exhibit.jpg') no-repeat center center/cover;
+    filter: blur(2px);
+    /* Very slight blur */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Behind text */
+}
+
+/* Quote with very light background */
+.quote {
+    color: black;
+    font-size: 2.5rem;
+    /* Reduced font size */
+    font-weight: bold;
+    max-width: 80%;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    /* Very minimal background */
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Section for options */
+.options {
+    padding: 50px;
+    background-color: #f4f4f4;
+}
+
+/* "Get Involved" heading */
+.options h2 {
+    font-size: 2rem;
+    /* Slightly smaller than quote */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Buttons inside gray boxes */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.buttons button {
+    background: #aa9898;
+    /* Light gray box */
+    padding: 20px 30px;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.buttons button:hover {
+    background: #b0b0b0;
+    /* Slightly darker on hover */
+}
+
+
+/* Initiate Your Exhibition Section */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #ffe6e6;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin-top: 30px;
+}
+
+.form-container {
+    background-color: #b2f1f1;
+    /* Light blue background */
+    padding: 30px;
+    width: 50%;
+    margin: 20px auto;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input,
+select {
+    width: 80%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    text-align: center;
+}
+
+select {
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Date Input Styling */
+.date-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 80%;
+}
+
+.date-container label {
+    font-weight: bold;
+}
+
+.date-container input {
+    width: 40%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    text-align: center;
+}
+
+button {
+    background-color: #32a4ff;
+    color: white;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #007bff;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .form-container {
+        width: 80%;
+    }
+
+    input,
+    select {
+        width: 90%;
+    }
+
+    .date-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .date-container input {
+        width: 90%;
+    }
+}
+
+
+
+/*  Your Exhibition Section */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #ffe6e6;
+    /* Faint pink background */
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    margin-top: 20px;
+    font-size: 28px;
+}
+
+.filter-container {
+    margin: 20px;
+    font-size: 18px;
+}
+
+.exhibition-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    /* Increased spacing between blocks */
+    padding: 20px;
+}
+
+.exhibition-card {
+    background-color: #cce7ff;
+    /* Light blue cards */
+    padding: 20px;
+    width: 320px;
+    border-radius: 10px;
+    text-align: left;
+    /* Align text to the left */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    /* Increased text size */
+}
+
+.exhibition-card p {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin: 8px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+    background-color: #ffe6e6;
+}
+
+h1 {
+    font-size: 2rem;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.exhibition-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.exhibition-card {
+    background-color: #ccf6f6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+.view-btn {
+    background-color: #4aa3f0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.view-btn:hover {
+    background-color: #2b82d9;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.artwork-card {
+    background-color: #ccf6f6;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.artwork-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.artwork-card h3 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+}
+
+.order-btn {
+    background-color: #4aa3f0;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.order-btn:hover {
+    background-color: #2b82d9;
+}

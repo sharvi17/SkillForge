@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Art Gallery</title>
+    <link rel="stylesheet" href="exhibition_styles.css">
+</head>
+
+<body>
+
+    <div class="banner">
+        <h1 class="quote">"Art speaks where words are unable to explain."</h1>
+    </div>
+
+
+
+    <section class="options">
+        <h2>Get Involved in the Exhibition</h2>
+        <div class="buttons">
+            <button onclick="startExhibition()">Initiate Your Own Exhibition</button>
+            <button onclick="registerExhibition()">Register to Existing Exhibition</button>
+            <button onclick="viewExhibition()">View Exhibitions for Bulk ordering</button>
+        </div>
+    </section>
+
+    <script>
+        function startExhibition() {
+            window.location.href = "../exhibition/exhibition_initiate.html";
+        }
+
+        function registerExhibition() {
+            window.location.href = "../exhibition/exhibition_register.html";
+        }
+        function viewExhibition() {
+            window.location.href = "exhibition/details.html";
+        }
+    </script>
+</body>
+
+</html>

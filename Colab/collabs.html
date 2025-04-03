@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Collaborations</title>
+    <link rel="stylesheet" href="colabstyle.css"> <!-- Linking to the custom CSS -->
+</head>
+
+<body>
+    <header>
+        <div class="logo">LOGO</div>
+        <h1>SKILLFORGE</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="collabs.html" class="active">My Collaborations</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Collaboration Opportunities</h2>
+
+        <!-- Filter Dropdown -->
+        <select id="category" onchange="filterCollabs()">
+            <option value="all">All</option>
+            <option value="pottery">Pottery</option>
+            <option value="textile">Textile</option>
+            <option value="woodwork">Woodwork</option>
+        </select>
+
+        <!-- Container for displaying collaboration opportunities -->
+        <div id="collabContainer"></div>
+
+        <!-- Scroll Button -->
+        <button onclick="scrollToTop()" class="scroll-button">⬆️ Scroll to Top</button>
+    </main>
+
+    <!-- External JS for functionality -->
+    <script src="script.js"></script> <!-- Linking to script.js -->
+</body>
+
+</html>

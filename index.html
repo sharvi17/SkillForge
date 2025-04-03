@@ -17,8 +17,8 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">Collaboration</a></li>
-                <li><a href="#">Exhibitions</a></li>
+                <li><a href="Colab\collabs.html">Collaboration</a></li>
+                <li><a href="exhibition\exhibition_home.html">Exhibitions</a></li>
                 <li><a href="auth.html">Sign In</a></li>
             </ul>
         </nav>
@@ -30,47 +30,22 @@
             <input type="text" placeholder="Search...">
             <button>🔍</button>
         </div>
+
+        <!-- Add greeting message here -->
+        <div id="greeting-message"></div>
     </section>
-    <!-- Add Firebase SDK -->
+
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        // On page load, check if a username exists in localStorage
+        window.onload = () => {
+            const username = localStorage.getItem("username");
 
-        // Your Firebase Configuration (Get this from Firebase Console)
-        const firebaseConfig = {
-            apiKey: "AIzaSyBgmyk6qgKezvHreR1dNzjOrPSsLDj-T3M",
-            authDomain: "skillforge123c.firebaseapp.com",
-            projectId: "skillforge123c",
-            storageBucket: "skillforge123c.firebasestorage.app",
-            messagingSenderId: "369787571092",
-            appId: "1:369787571092:web:2e35dc93a9c4eb8c699d81",
-            measurementId: "G-FR149VM4YC"
-        };
-
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-    </script>
-    <script>
-        async function fetchMessage() {
-            try {
-                const response = await fetch("http://localhost:3000/api/message");
-                const data = await response.json();
-                console.log("Backend Message:", data.message);
-                alert(`Backend says: ${data.message}`);
-            } catch (error) {
-                console.error("Error fetching message:", error);
+            if (username) {
+                // Display greeting with the username
+                document.getElementById("greeting-message").innerHTML = `Hey ${username}, what are you looking for today?`;
             }
-        }
-
-        // Trigger the API call on page load
-        window.onload = fetchMessage;
+        };
     </script>
-
-
 </body>
 
 </html>

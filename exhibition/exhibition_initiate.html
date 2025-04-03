@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initiate Your Exhibition</title>
+    <link rel="stylesheet" href="exhibition_styles.css">
+</head>
+
+<body>
+    <h1>Initiate Your Exhibition</h1>
+
+    <div class="form-container">
+        <input type="text" id="exhibitionName" placeholder="Exhibition Name">
+        <input type="text" id="description" placeholder="Description">
+
+        <select id="category">
+            <option value="" disabled selected>Select Category</option>
+            <option value="Pottery">Pottery</option>
+            <option value="Weaving">Weaving</option>
+            <option value="Carpentry">Carpentry</option>
+            <option value="Painting">Painting</option>
+        </select>
+
+        <input type="text" id="location" placeholder="Location">
+
+        <div class="date-container">
+            <label for="fromDate">From:</label>
+            <input type="date" id="fromDate">
+
+            <label for="toDate">To:</label>
+            <input type="date" id="toDate">
+        </div>
+
+        <button id="createExhibition">Create Exhibition</button>
+    </div>
+
+    <script type="module" src="exhibition_initiate.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+/* Light Pink Background */
+body {
+    background-color: #ffe6e6;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    margin-top: 20px;
+    font-size: 28px;
+}
+
+/* Form Container - Light Blue */
+.form-container {
+    background-color: #cce7ff; /* Light blue */
+    padding: 30px;
+    width: 40%;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Input Fields - Equal Padding & Centered Text */
+input {
+    width: 90%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Upload Image Box - Centered */
+.upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 15px 0;
+}
+
+.upload-box {
+    background-color: #a0d2ff; /* Light blue */
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+/* Hide default file input */
+#imageUpload {
+    display: none;
+}
+
+/* Submit Button */
+button {
+    width: 50%;
+    padding: 12px;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: none;
+    background-color: #42a5f5;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #1e88e5;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #d1f9fc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.order-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 350px;
+}
+
+h1 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    display: block;
+}
+
+.order-btn {
+    background-color: #42a5f5;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.order-btn:hover {
+    background-color: #1e88e5;
+}

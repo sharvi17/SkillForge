@@ -1,0 +1,122 @@
+/* General styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('assets/img2.jpeg');
+    /* Full-page background */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: rgba(255, 255, 255, 0.7);
+    /* Light background for contrast */
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 2cm;
+    /* 2cm x 2cm size */
+    width: 2cm;
+    object-fit: cover;
+}
+
+/* Navigation */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #1A9EC3;
+    font-size: 16px;
+    padding: 10px 20px;
+    /* Proper padding for buttons */
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: background 0.3s ease;
+}
+
+.nav-links a:hover {
+    background-color: rgba(26, 158, 195, 0.7);
+    color: white;
+}
+
+/* Hero section */
+.hero {
+    text-align: center;
+    color: white;
+    padding: 100px 20px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Title */
+.hero h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Search bar */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: pink;
+    /* Baby pink */
+    padding: 10px;
+    border-radius: 25px;
+    width: 350px;
+    margin: 0 auto;
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    padding: 10px;
+    border-radius: 20px;
+    width: 250px;
+    background-color: white;
+}
+
+.search-container button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    padding-left: 10px;
+}
+
+/* Exhibition Section */
+.exhibitions {
+    text-align: center;
+    color: white;
+    margin-top: 30px;
+}
+
+.exhibition-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.exhibition-item {
+    background: white;
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}

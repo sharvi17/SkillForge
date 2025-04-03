@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillForge Collaboration</title>
+    <link rel="stylesheet" href="Colab/colabstyle.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="../assets/logo.jpeg" alt="SkillForge Logo"> <!-- Replace with actual logo -->
+            <h1>SKILLFORGE</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="Colab\index.html">Collaboration</a></li>
+                <li><a href="#">Exhibitions</a></li>
+                <li><a href="auth.html">Sign In</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Collaborate</h2>
+        <select id="category" onchange="filterCollabs()">
+            <option value="all">All Categories</option>
+            <option value="pottery">Pottery</option>
+            <option value="textile">Textile</option>
+            <option value="woodwork">Woodwork</option>
+        </select>
+
+        <div class="collab-container" id="collabContainer">
+            <!-- Collaboration boxes will be generated here -->
+        </div>
+    </main>
+
+    <script src="Colab\script.js"></script>
+</body>
+
+</html>

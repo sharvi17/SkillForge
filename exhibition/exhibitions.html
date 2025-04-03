@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exhibitions</title>
+    <link rel="stylesheet" href="exhibition_style.css">
+</head>
+
+<body>
+
+    <h1>UPCOMING AND ONGOING EXHIBITIONS</h1>
+
+    <!-- Filter Dropdown -->
+    <div class="filter-container">
+        <label for="categoryFilter">Filter by Category:</label>
+        <select id="categoryFilter">
+            <option value="All">All</option>
+            <option value="Pottery">Pottery</option>
+            <option value="Weaving">Weaving</option>
+            <option value="Carpentry">Carpentry</option>
+            <option value="Painting">Painting</option>
+        </select>
+    </div>
+
+    <!-- Exhibition List -->
+    <div id="exhibitionContainer" class="exhibition-grid"></div>
+
+    <script src="exhibition_script.js"></script>
+</body>
+
+</html>

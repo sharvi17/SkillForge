@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "skillforge-8e5b3",
+    "test-project": "skillforge-8e5b3"
+  },
+  "targets": {},
+  "etags": {}
+}

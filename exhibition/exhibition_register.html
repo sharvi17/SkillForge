@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="exhibition_style1.css">
+</head>
+
+<body>
+
+    <h2>Register for Exhibition</h2>
+
+    <div class="form-container">
+        <form id="registration-form">
+            <input type="text" id="name" placeholder="Enter Your Name" required>
+            <input type="email" id="email" placeholder="Enter Your Email" required>
+            <input type="text" id="artwork_title" placeholder="Artwork Title" required>
+            <input type="number" id="price" placeholder="Artwork Price (₹)" required>
+
+            <div class="upload-container">
+                <label for="imageUpload" class="upload-box">Upload Your Artwork</label>
+                <input type="file" id="imageUpload" required>
+            </div>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <!-- ✅ Use `type="module"` to load the JS file correctly -->
+    <script type="module" src="exhibition_register.js"></script>
+
+</body>
+
+</html>

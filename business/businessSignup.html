@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Business Signup</title>
+    <style>
+        /* Page Background */
+        body {
+            background-color: #fbe0e6;
+            /* Baby pink background */
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Form Container */
+        form {
+            background-color: white;
+            padding: 30px;
+            margin: 50px auto;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            font-size: 18px;
+        }
+
+        /* Input Fields */
+        input[type="text"],
+        .category-select input[type="checkbox"] {
+            padding: 10px;
+            margin: 8px 0;
+            width: 80%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        /* Button Styling */
+        button[type="submit"] {
+            background-color: #ff80ab;
+            /* Pink button */
+            color: white;
+            padding: 12px 20px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #ff4081;
+            /* Darker pink on hover */
+        }
+
+        /* Success and Error Message */
+        #success-message,
+        #error-message {
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* Adding Flower Images */
+        .flowers {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .flowers img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Flower Decoration -->
+    <div class="flowers">
+
+        <img src="assets/tenor.gif" alt="paint GIF">
+
+    </div>
+
+    <!-- Business Signup Form -->
+    <form id="business-signup-form">
+        <h2>Business Signup</h2>
+
+        <label for="business-name">Business Name:</label><br>
+        <input type="text" id="business-name" required><br><br>
+
+        <label for="business-location">Business Location:</label><br>
+        <input type="text" id="business-location" required><br><br>
+
+        <label for="google-profile-id">Google Profile ID:</label><br>
+        <input type="text" id="google-profile-id" required><br><br>
+
+        <label for="categories">Categories:</label><br>
+        <div class="category-select">
+            <input type="checkbox" value="Handicrafts" id="handicrafts"> Handicrafts<br>
+            <input type="checkbox" value="Textile" id="textile"> Textile<br>
+            <input type="checkbox" value="Pottery" id="pottery"> Pottery<br>
+            <input type="checkbox" value="Paintings" id="paintings"> Paintings<br>
+            <input type="checkbox" value="Clothes" id="clothes"> Clothes<br>
+            <input type="checkbox" value="Jewelry" id="jewelry"> Jewelry<br>
+            <input type="checkbox" value="Other" id="other"> Other<br>
+        </div>
+        <br><br>
+
+        <button type="submit">Register Business</button>
+    </form>
+
+    <!-- Success and Error Messages -->
+    <div id="error-message"></div>
+    <div id="success-message"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyCYQBMwKw3StqGIJ1OP0Qnk9c0UmnatnQk",
+            authDomain: "skillforge-8e5b3.firebaseapp.com",
+            projectId: "skillforge-8e5b3",
+            storageBucket: "skillforge-8e5b3.appspot.com",
+            messagingSenderId: "126378296654",
+            appId: "1:126378296654:web:d3f0f7abb3fa444caf0a1f",
+            measurementId: "G-E6X2VQV0TN"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Form submission logic
+        const signupForm = document.getElementById("business-signup-form");
+        const errorMessage = document.getElementById('error-message');
+        const successMessage = document.getElementById('success-message');
+
+        signupForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            // Get form data
+            const businessName = document.getElementById("business-name").value.trim();
+            const businessLocation = document.getElementById("business-location").value.trim();
+            const googleProfileId = document.getElementById("google-profile-id").value.trim();
+
+            if (!businessName || !businessLocation || !googleProfileId) {
+                errorMessage.textContent = "Please fill in all required fields";
+                successMessage.textContent = "";
+                return;
+            }
+
+            const selectedCategories = Array.from(document.querySelectorAll('.category-select input[type="checkbox"]:checked')).map((checkbox) => checkbox.value);
+
+            if (selectedCategories.length === 0) {
+                errorMessage.textContent = "Please select at least one category";
+                successMessage.textContent = "";
+                return;
+            }
+
+            try {
+                await db.collection("businesses").add({
+                    name: businessName,
+                    location: businessLocation,
+                    googleProfileId: googleProfileId,
+                    categories: selectedCategories,
+                    createdAt: new Date().toISOString(),
+                    status: "active"
+                });
+
+                successMessage.textContent = "Business registered successfully!";
+                errorMessage.textContent = "";
+                localStorage.setItem("businessId", googleProfileId);
+                window.location.href = "business-dashboard.html";
+
+            } catch (error) {
+                console.error("Error registering business:", error);
+                errorMessage.textContent = `Registration failed: ${error.message}`;
+                successMessage.textContent = "";
+            }
+        });
+    </script>
+</body>
+
+</html>
