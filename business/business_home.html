@@ -11,14 +11,14 @@
 <body>
     <header class="navbar">
         <div class="logo">
-            <img src="assets/logo.jpeg" alt="SkillForge Logo">
+            <img src="../assets/logo.jpeg" alt="SkillForge Logo"> <!-- Fixed path -->
             <h1>SKILLFORGE</h1>
         </div>
         <nav>
             <ul class="nav-links">
                 <li><a href="business_home.html">Home</a></li>
-                <li><a href="Colab/collabs.html">Collaboration</a></li>
-                <li><a href="exhibitions.html">Exhibitions</a></li>
+                <li><a href="business_artist_colab(2).html">Collaboration</a></li> <!-- Fixed -->
+                <li><a href="../exhibition/exhibition_home.html">Exhibitions</a></li> <!-- Fixed -->
                 <li><a href="business-dashboard.html">Dashboard</a></li>
             </ul>
         </nav>
@@ -34,8 +34,7 @@
 
     <section class="exhibitions">
         <h2>Newly Launched Talent</h2>
-        <div class="exhibition-grid" id="exhibition-grid">
-        </div>
+        <div class="exhibition-grid" id="exhibition-grid"></div>
     </section>
 
     <script type="module">
@@ -43,10 +42,10 @@
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY", // Replace with your API key
+            apiKey: "AIzaSyCYQBMwKw3StqGIJ1OP0Qnk9c0UmnatnQk",
             authDomain: "skillforge123c.firebaseapp.com",
             projectId: "skillforge123c",
-            storageBucket: "skillforge123c.firebasestorage.app",
+            storageBucket: "skillforge123c.appspot.com",
             messagingSenderId: "369787571092",
             appId: "1:369787571092:web:2e35dc93a9c4eb8c699d81",
             measurementId: "G-FR149VM4YC"
@@ -57,15 +56,14 @@
 
         async function fetchExhibitions() {
             try {
-                const querySnapshot = await getDocs(collection(db, "exhibitions")); // Assuming you have an "exhibitions" collection
+                const querySnapshot = await getDocs(collection(db, "exhibitions"));
                 const exhibitionGrid = document.getElementById("exhibition-grid");
-                exhibitionGrid.innerHTML = ""; // Clear existing content
+                exhibitionGrid.innerHTML = "";
 
                 querySnapshot.forEach((doc) => {
                     const exhibitionData = doc.data();
                     const exhibitionItem = document.createElement("div");
                     exhibitionItem.classList.add("exhibition-item");
-
                     exhibitionItem.innerHTML = `
                         <img src="${exhibitionData.imageUrl}" alt="${exhibitionData.talentName}">
                         <h3>${exhibitionData.talentName}</h3>
@@ -109,8 +107,7 @@
             }
         }
 
-        fetchExhibitions(); // Load exhibitions on page load
-
+        fetchExhibitions();
         document.getElementById("search-button").addEventListener("click", searchExhibitions);
     </script>
 </body>

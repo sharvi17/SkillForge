@@ -10,20 +10,20 @@ export async function askKalaBot(userMessage) {
         },
         body: JSON.stringify({
             contents: [
-                {
-                    role: "user",
-                    parts: [{ text: userMessage }]
+
+                role: "user",
+                parts: [{ text: userMessage }]
                 }
             ]
-        })
+})
     });
 
-    const data = await response.json();
-    console.log("Gemini API Response:", data);
+const data = await response.json();
+console.log("Gemini API Response:", data);
 
-    if (data?.candidates?.[0]?.content?.parts?.[0]?.text) {
-        return data.candidates[0].content.parts[0].text;
-    } else {
-        return "Sorry, I couldn't understand that.";
-    }
+if (data?.candidates?.[0]?.content?.parts?.[0]?.text) {
+    return data.candidates[0].content.parts[0].text;
+} else {
+    return "Sorry, I couldn't understand that.";
+}
 }

@@ -1,65 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>Business Dashboard</title>
     <style>
         body {
-            font-family: sans-serif;
-            margin: 20px;
-        }
-
-        .profile-section {
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .profile-section h2 {
-            margin-top: 0;
-        }
-
-        .home-button {
-            background-color: #4CAF50;
-            /* Green */
-            border: none;
-            color: white;
-            padding: 10px 20px;
+            background-color: #fff0f5;
+            font-family: Arial, sans-serif;
             text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            border-radius: 5px;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #d81b60;
+        }
+
+        .dashboard-section {
+            background-color: white;
+            padding: 20px;
+            margin: 30px auto;
+            width: 60%;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .info-value {
+            color: #333;
         }
     </style>
 </head>
 
 <body>
+    <h2>Welcome, <span id="business-name">Loading...</span>!</h2>
 
-    <h1>Business Dashboard</h1>
-
-    <button class="home-button" onclick="window.location.href='business_home.html'">Home</button>
-
-
-
-
-    <div id="profile-display" class="profile-section">
-        <h2>Business Profile</h2>
-        <div id="business-name"></div>
-        <div id="business-location"></div>
-        <div id="email"></div>
-        <div id="google-profile-id"></div>
-        <div id="categories"></div>
-        <div id="created-at"></div>
+    <div class="dashboard-section">
+        <p><span class="info-label">Location:</span> <span id="business-location">Loading...</span></p>
+        <p><span class="info-label">Google Profile ID:</span> <span id="business-id">Loading...</span></p>
+        <p><span class="info-label">Categories:</span> <span id="business-categories">Loading...</span></p>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
     <script>
-        // Initialize Firebase
+        // Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyCYQBMwKw3StqGIJ1OP0Qnk9c0UmnatnQk",
             authDomain: "skillforge-8e5b3.firebaseapp.com",
@@ -70,32 +60,41 @@
             measurementId: "G-E6X2VQV0TN"
         };
 
-        console.log("Initializing Firebase...");
         firebase.initializeApp(firebaseConfig);
-        console.log("Firebase initialized.");
-
         const db = firebase.firestore();
 
-        async function displayProfile() {
-            // Fetch the first document from the "businesses" collection
-            const querySnapshot = await db.collection("businesses").limit(1).get();
+        const nameSpan = document.getElementById("business-name");
+        const locationSpan = document.getElementById("business-location");
+        const idSpan = document.getElementById("business-id");
+        const categoriesSpan = document.getElementById("business-categories");
 
-            if (!querySnapshot.empty) {
-                const doc = querySnapshot.docs[0];
-                const businessData = doc.data();
+        const businessId = localStorage.getItem("businessId");
 
-                document.getElementById("business-name").textContent = `Business Name: ${businessData.name}`;
-                document.getElementById("business-location").textContent = `Location: ${businessData.location}`;
-                document.getElementById("email").textContent = `Email: ${businessData.email}`;
-                document.getElementById("google-profile-id").textContent = `Google Profile ID: ${businessData.googleProfileId}`;
-                document.getElementById("categories").textContent = `Categories: ${businessData.categories.join(", ")}`;
-                document.getElementById("created-at").textContent = `Created At: ${businessData.createdAt}`;
-            } else {
-                document.getElementById("profile-display").innerHTML = "<p>No profile found.</p>";
-            }
+        if (!businessId) {
+            alert("No business ID found. Please sign up or log in again.");
+        } else {
+            db.collection("businesses")
+                .where("googleProfileId", "==", businessId)
+                .limit(1)
+                .get()
+                .then((querySnapshot) => {
+                    if (querySnapshot.empty) {
+                        nameSpan.textContent = "Business not found";
+                        return;
+                    }
+
+                    const businessData = querySnapshot.docs[0].data();
+
+                    nameSpan.textContent = businessData.name || "N/A";
+                    locationSpan.textContent = businessData.location || "N/A";
+                    idSpan.textContent = businessData.googleProfileId || "N/A";
+                    categoriesSpan.textContent = (businessData.categories || []).join(", ");
+                })
+                .catch((error) => {
+                    console.error("Error loading business data:", error);
+                    nameSpan.textContent = "Error loading data";
+                });
         }
-
-        displayProfile();
     </script>
 </body>
 

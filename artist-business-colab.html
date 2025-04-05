@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artist Collaboration - Business View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #eaeaea;
+        }
+
+        h1,
+        h2 {
+            color: #2c3e50;
+        }
+
+        .collab-info {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            font-size: 16px;
+            margin: 10px;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn.chat {
+            background-color: #2c3e50;
+        }
+
+        .btn.chat:hover {
+            background-color: #1c2833;
+        }
+
+        .btn.payment {
+            background-color: #27ae60;
+        }
+
+        .btn.payment:hover {
+            background-color: #1e8449;
+        }
+
+        .btn.feedback {
+            background-color: #16a085;
+        }
+
+        .btn.feedback:hover {
+            background-color: #117a65;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            display: none;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        textarea {
+            height: 60px;
+        }
+
+        .feedback {
+            font-style: italic;
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Collaboration with Artist: Anaya Ceramics</h1>
+
+    <div class="collab-info">
+        <h2>Terracotta Ecoware Set</h2>
+        <p><strong>Artist:</strong> Anaya Ceramics</p>
+        <p><strong>Description:</strong> Collaboration for handmade eco-friendly kitchenware. Delivery expected in 10
+            days.</p>
+    </div>
+
+    <button class="btn chat" onclick="showSection('chat')">Chat with Artist</button>
+    <button class="btn payment" onclick="showSection('payment')">Make Payment</button>
+    <button class="btn feedback" onclick="showSection('feedback')">View Feedback</button>
+
+    <!-- Chat Section -->
+    <div id="chat" class="section">
+        <h3>Chat with Anaya Ceramics</h3>
+        <p><strong>You:</strong> The samples look great!</p>
+        <p><strong>Artist:</strong> Thank you! I'll ship them tomorrow.</p>
+        <textarea placeholder="Type your message..." disabled></textarea>
+    </div>
+
+    <!-- Payment UI -->
+    <div id="payment" class="section">
+        <h3>Payment Gateway (UI Only)</h3>
+        <p><strong>Amount:</strong> ₹2,000</p>
+        <input type="text" placeholder="Card Number (XXXX-XXXX-XXXX-XXXX)">
+        <input type="text" placeholder="Expiry (MM/YY)">
+        <input type="password" placeholder="CVV">
+        <button class="btn payment">Pay Now</button>
+    </div>
+
+    <!-- Feedback UI -->
+    <div id="feedback" class="section">
+        <h3>Feedback from Other Businesses</h3>
+        <p class="feedback">⭐️⭐️⭐️⭐️⭐️ “Excellent finish and quick shipping.”</p>
+        <p class="feedback">⭐️⭐️⭐️⭐️ “Loved the designs! Very cooperative artist.”</p>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            document.getElementById('chat').style.display = 'none';
+            document.getElementById('payment').style.display = 'none';
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById(sectionId).style.display = 'block';
+        }
+    </script>
+
+</body>
+
+</html>
