@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artist Collaboration - Business View</title>
+    <title>Collaboration - Artist View</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,12 +43,12 @@
             background-color: #1c2833;
         }
 
-        .btn.payment {
-            background-color: #27ae60;
+        .btn.ship {
+            background-color: #2980b9;
         }
 
-        .btn.payment:hover {
-            background-color: #1e8449;
+        .btn.ship:hover {
+            background-color: #1c5985;
         }
 
         .btn.feedback {
@@ -86,55 +86,111 @@
             font-style: italic;
             color: #555;
         }
+
+        #toast {
+            visibility: hidden;
+            min-width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 10px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2s;
+        }
+
+        @keyframes fadein {
+            from {
+                bottom: 10px;
+                opacity: 0;
+            }
+
+            to {
+                bottom: 30px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeout {
+            from {
+                bottom: 30px;
+                opacity: 1;
+            }
+
+            to {
+                bottom: 10px;
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-    <h1>Collaboration with Artist: Anaya Ceramics</h1>
+    <h1>Collaboration with Business: LocalBazaar Pvt. Ltd.</h1>
 
     <div class="collab-info">
         <h2>Terracotta Ecoware Set</h2>
-        <p><strong>Artist:</strong> Anaya Ceramics</p>
-        <p><strong>Description:</strong> Collaboration for handmade eco-friendly kitchenware. Delivery expected in 10
-            days.</p>
+        <p><strong>Business:</strong> LocalBazaar Pvt. Ltd.</p>
+        <p><strong>Description:</strong> Supplying handmade eco-friendly kitchenware. Delivery expected in 10 days.</p>
     </div>
 
-    <button class="btn chat" onclick="showSection('chat')">Chat with Artist</button>
-    <button class="btn payment" onclick="showSection('payment')">Make Payment</button>
+    <button class="btn chat" onclick="showSection('chat')">Chat with Business</button>
+    <button class="btn ship" onclick="markShipped()">Mark as Shipped</button>
     <button class="btn feedback" onclick="showSection('feedback')">View Feedback</button>
 
     <!-- Chat Section -->
     <div id="chat" class="section">
-        <h3>Chat with Anaya Ceramics</h3>
-        <p><strong>You:</strong> The samples look great!</p>
-        <p><strong>Artist:</strong> Thank you! I'll ship them tomorrow.</p>
-        <textarea placeholder="Type your message..." disabled></textarea>
-    </div>
-
-    <!-- Payment UI -->
-    <div id="payment" class="section">
-        <h3>Payment Gateway (UI Only)</h3>
-        <p><strong>Amount:</strong> ₹2,000</p>
-        <input type="text" placeholder="Card Number (XXXX-XXXX-XXXX-XXXX)">
-        <input type="text" placeholder="Expiry (MM/YY)">
-        <input type="password" placeholder="CVV">
-        <button class="btn payment">Pay Now</button>
+        <h3>Chat with LocalBazaar</h3>
+        <div id="chat-box">
+            <p><strong>You:</strong> Ready for delivery by Monday!</p>
+            <p><strong>Business:</strong> Perfect. We’re looking forward to it!</p>
+        </div>
+        <textarea id="chat-input" placeholder="Type your message..."></textarea>
+        <button class="btn chat" onclick="sendMessage()">Send</button>
     </div>
 
     <!-- Feedback UI -->
     <div id="feedback" class="section">
-        <h3>Feedback from Other Businesses</h3>
-        <p class="feedback">⭐️⭐️⭐️⭐️⭐️ “Excellent finish and quick shipping.”</p>
-        <p class="feedback">⭐️⭐️⭐️⭐️ “Loved the designs! Very cooperative artist.”</p>
+        <h3>Feedback from Businesses</h3>
+        <p class="feedback">⭐️⭐️⭐️⭐️⭐️ “Top-notch packaging and commitment to delivery timelines.”</p>
+        <p class="feedback">⭐️⭐️⭐️⭐️ “Great craftsmanship, minor delay but worth the wait!”</p>
     </div>
+
+    <div id="toast">Marked as Shipped</div>
 
     <script>
         function showSection(sectionId) {
-            document.getElementById('chat').style.display = 'none';
-            document.getElementById('payment').style.display = 'none';
-            document.getElementById('feedback').style.display = 'none';
+            ['chat', 'feedback'].forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
             document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function markShipped() {
+            const toast = document.getElementById("toast");
+            toast.className = "show";
+            setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
+        }
+
+        function sendMessage() {
+            const input = document.getElementById("chat-input");
+            const message = input.value.trim();
+            if (message) {
+                const chatBox = document.getElementById("chat-box");
+                const p = document.createElement("p");
+                p.innerHTML = `<strong>You:</strong> ${message}`;
+                chatBox.appendChild(p);
+                input.value = "";
+            }
         }
     </script>
 
