@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SkillForge - Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
@@ -13,33 +13,38 @@
         <div class="auth-box">
             <h2>Sign In</h2>
             <form id="login-form">
-                <input type="email" id="login-email" placeholder="Enter Email" required>
-                <input type="password" id="login-password" placeholder="Enter Password" required>
+                <input type="email" id="login-email" placeholder="Enter Email" required />
+                <input type="password" id="login-password" placeholder="Enter Password" required />
                 <button type="submit">Login</button>
+
+                <p><a href="forgetpassword.html" id="forgot-password">Forgot Password?</a></p>
+                <button type="button" id="google-login">Sign in with Google</button>
             </form>
             <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
         </div>
     </div>
 
+    <!-- Firebase Authentication Logic -->
     <script type="module">
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
 
         const firebaseConfig = {
-            apiKey: "AIzaSyBgmyk6qgKezvHreR1dNzjOrPSsLDj-T3M",
-            authDomain: "skillforge123c.firebaseapp.com",
-            projectId: "skillforge123c",
-            storageBucket: "skillforge123c.firebasestorage.app",
-            messagingSenderId: "369787571092",
-            appId: "1:369787571092:web:2e35dc93a9c4eb8c699d81",
-            measurementId: "G-FR149VM4YC"
+            apiKey: "AIzaSyCYQBMwKw3StqGIJ1OP0Qnk9c0UmnatnQk",
+            authDomain: "skillforge-8e5b3.firebaseapp.com",
+            projectId: "skillforge-8e5b3",
+            storageBucket: "skillforge-8e5b3.appspot.com",
+            messagingSenderId: "126378296654",
+            appId: "1:126378296654:web:d3f0f7abb3fa444caf0a1f",
+            measurementId: "G-E6X2VQV0TN"
         };
 
-        // Initialize Firebase
+
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const provider = new GoogleAuthProvider();
 
-        // Handle login form submission
+        // Email/Password login
         document.getElementById("login-form").addEventListener("submit", (e) => {
             e.preventDefault();
 
@@ -49,15 +54,27 @@
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-
-                    // Save the username in localStorage (You can customize this as per your requirement)
                     localStorage.setItem("username", user.displayName || "User");
+                    window.location.href = "index.html";
+                })
+                .catch(() => {
+                    const errorMsg = document.createElement("p");
+                    errorMsg.style.color = "red";
+                    errorMsg.textContent = "Invalid email or password. Please try again.";
+                    document.querySelector(".auth-box").appendChild(errorMsg);
+                });
+        });
 
-                    // Redirect to home page after successful login
+        // Google Sign-In
+        document.getElementById("google-login").addEventListener("click", () => {
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    const user = result.user;
+                    localStorage.setItem("username", user.displayName || "User");
                     window.location.href = "index.html";
                 })
                 .catch((error) => {
-                    console.error("Error during login:", error);
+                    alert("Google sign-in failed: " + error.message);
                 });
         });
     </script>

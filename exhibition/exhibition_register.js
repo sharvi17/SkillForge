@@ -1,9 +1,7 @@
-// ✅ Import Firebase as a module (correct way for Firebase v10+)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js";
 
-// ✅ Your Firebase config (replace with actual config values)
+// ✅ Firebase Config
 const firebaseConfig = {
     apiKey: "AIzaSyCYQBMwKw3StqGIJ1OP0Qnk9c0UmnatnQk",
     authDomain: "skillforge-8e5b3.firebaseapp.com",
@@ -17,7 +15,6 @@ const firebaseConfig = {
 // ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
 console.log("Firebase Initialized Successfully!");
 
@@ -29,26 +26,20 @@ document.getElementById("registration-form").addEventListener("submit", async fu
     const email = document.getElementById("email").value;
     const artworkTitle = document.getElementById("artwork_title").value;
     const price = document.getElementById("price").value;
-    const imageFile = document.getElementById("imageUpload").files[0];
+    const imageUrl = document.getElementById("imageURL").value;
 
-    if (!imageFile) {
-        alert("Please upload an artwork image.");
+    if (!imageUrl.startsWith("https://")) {
+        alert("Please paste a valid Google Drive image link.");
         return;
     }
 
     try {
-        // ✅ Upload Image to Firebase Storage
-        const storageRef = ref(storage, `artworks/${imageFile.name}`);
-        await uploadBytes(storageRef, imageFile);
-        const imageUrl = await getDownloadURL(storageRef);
-
-        // ✅ Save Form Data to Firestore
         await addDoc(collection(db, "exhibition_registrations"), {
-            name: name,
-            email: email,
-            artworkTitle: artworkTitle,
-            price: price,
-            imageUrl: imageUrl,
+            name,
+            email,
+            artworkTitle,
+            price,
+            imageUrl,
             timestamp: new Date()
         });
 

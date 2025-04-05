@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+
 
 // Your web app's Firebase configuration
 // Replace these values with your actual Firebase project configuration
@@ -14,8 +15,6 @@ const firebaseConfig = {
     measurementId: "G-E6X2VQV0TN"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Export the Firebase app instance
-export { app };
+export { app }; // Export it, don't declare again elsewhere

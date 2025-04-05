@@ -1,6 +1,8 @@
-import { app } from "./src/firebaseConfig.js";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { app } from "./firebaseConfig.js";  // 🔍 Check the path (should not be `./src/firebaseConfig.js` unless it's inside `src/`)
+
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+
 
 document.addEventListener("DOMContentLoaded", function () {
     console.log("script.js loaded successfully!");
@@ -40,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             alert("Account created successfully!");
+            console.log("Redirecting to home page..."); // Debugging log
             window.location.href = "index.html";
         } catch (error) {
             alert(`Error: ${error.message}`);

@@ -52,7 +52,7 @@ signupForm.addEventListener("submit", async (e) => {
 
         uccessMessage.textContent = "Business account created successfully!";
         loadingIndicator.style.display = "none";
-        window.location.href = "business\business-dashboard.html"; // Redirect to dashboard
+        window.location.href = "business/business-dashboard.html"; // Redirect to dashboard
 
     } catch (error) {
         console.error("Error:", error);

@@ -6,23 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SkillForge - Home</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .profile-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #8e4caf;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .profile-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <div class="logo">
-            <img src="assets\logo.jpeg" alt="SkillForge Logo"> <!-- Replace with actual logo -->
+            <img src="assets/logo.jpeg" alt="SkillForge Logo">
             <h1>SKILLFORGE</h1>
         </div>
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="Colab\collabs.html">Collaboration</a></li>
-                <li><a href="exhibition\exhibition_home.html">Exhibitions</a></li>
+                <li><a href="Colab/collabs.html">Collaboration</a></li>
+                <li><a href="exhibition/exhibition_home.html">Exhibitions</a></li>
                 <li><a href="auth.html">Sign In</a></li>
             </ul>
         </nav>
     </header>
+    <!-- KalaBot Button -->
+    <div id="kalabot-button" style="
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: black;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    font-family: sans-serif;
+">KalaBot</div>
+
+    <!-- KalaBot Popup -->
+    <div id="kalabot-popup" style="
+    display: none;
+    position: fixed;
+    bottom: 70px;
+    left: 20px;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 10px;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+">
+        <div style="background:black; color:white; padding:10px; text-align:center;">KalaBot</div>
+        <div id="chat-messages" style="flex: 1; padding: 10px; overflow-y: auto;"></div>
+        <form id="chat-form" style="display: flex; padding: 10px; border-top: 1px solid #ccc;">
+            <input type="text" id="user-input" placeholder="Ask about local art..." style="flex: 1; padding: 5px;"
+                required />
+            <button type="submit" style="margin-left: 5px;">Send</button>
+        </form>
+    </div>
 
     <section class="hero">
         <h2>Empowering Artisans, <br> Transforming Skills</h2>
@@ -31,21 +86,58 @@
             <button>🔍</button>
         </div>
 
-        <!-- Add greeting message here -->
+        <!-- Greeting Message -->
         <div id="greeting-message"></div>
+
+        <!-- View Profile Button -->
+        <button onclick="window.location.href='profile.html'" class="profile-btn">View Profile</button>
+
     </section>
 
     <script type="module">
-        // On page load, check if a username exists in localStorage
         window.onload = () => {
             const username = localStorage.getItem("username");
-
             if (username) {
-                // Display greeting with the username
-                document.getElementById("greeting-message").innerHTML = `Hey ${username}, what are you looking for today?`;
+                document.getElementById("greeting-message").innerHTML =
+                    `Hey ${username}, what are you looking for today?`;
             }
         };
     </script>
+    <script type="module" src="KalaBot.js"></script>
+    <script type="module">
+        import { askKalaBot } from './KalaBot.js';
+
+        const kalabotBtn = document.getElementById('kalabot-button');
+        const kalabotPopup = document.getElementById('kalabot-popup');
+        const chatForm = document.getElementById('chat-form');
+        const userInput = document.getElementById('user-input');
+        const chatMessages = document.getElementById('chat-messages');
+
+        kalabotBtn.addEventListener('click', () => {
+            kalabotPopup.style.display = kalabotPopup.style.display === 'none' ? 'flex' : 'none';
+        });
+
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = userInput.value.trim();
+            if (!message) return;
+
+            const userMsgDiv = document.createElement('div');
+            userMsgDiv.textContent = "You: " + message;
+            chatMessages.appendChild(userMsgDiv);
+
+            userInput.value = "";
+
+            const botReply = await askKalaBot(message);
+
+            const botMsgDiv = document.createElement('div');
+            botMsgDiv.textContent = "KalaBot: " + botReply;
+            chatMessages.appendChild(botMsgDiv);
+
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        });
+    </script>
+
 </body>
 
 </html>

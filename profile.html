@@ -2,77 +2,139 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-    <script type="module" src="profile.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Profile - SkillForge</title>
+    <link rel="stylesheet" href="style.css" />
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-        }
-
-        .container {
-            width: 50%;
+        .profile-container {
+            padding: 2rem;
+            max-width: 600px;
             margin: auto;
-            background: white;
-            padding: 20px;
-            margin-top: 50px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px gray;
+            background-color: #f7f7f7;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
-        .logout-btn {
-            background: red;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            cursor: pointer;
+        .profile-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-details,
+        .exhibitions {
+            margin-bottom: 20px;
+        }
+
+        .exhibitions ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .exhibitions li {
+            padding: 8px;
+            background: #fff;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h2>Welcome, <span id="username">Loading...</span></h2>
-        <p>Email: <span id="useremail">Loading...</span></p>
-        <p>GI Tag: <span id="usergi">Loading...</span></p> <!-- Display GI Tag -->
-        <button class="logout-btn" onclick="logout()">Logout</button>
+    <div class="profile-container">
+        <h2>Your Profile</h2>
+        <div class="profile-details" id="profile-details">
+            <!-- Profile details will go here -->
+        </div>
+
+        <div class="exhibitions">
+            <h3>Registered Exhibitions</h3>
+            <ul id="exhibition-list">
+                <!-- Registered exhibitions will be listed here -->
+            </ul>
+        </div>
     </div>
 
     <script type="module">
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-app.js";
+        import {
+            getAuth,
+            onAuthStateChanged,
+            setPersistence,
+            browserLocalPersistence
+        } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-auth.js";
+        import {
+            getFirestore,
+            doc,
+            getDoc,
+            collection,
+            query,
+            where,
+            getDocs
+        } from "https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore.js";
 
-        const auth = getAuth();
-        const db = getFirestore();
+        const firebaseConfig = {
+            apiKey: "AIzaSyCYQBMwKw3StqGIJ1OP0Qnk9c0UmnatnQk",
+            authDomain: "skillforge-8e5b3.firebaseapp.com",
+            projectId: "skillforge-8e5b3",
+            storageBucket: "skillforge-8e5b3.appspot.com",
+            messagingSenderId: "126378296654",
+            appId: "1:126378296654:web:d3f0f7abb3fa444caf0a1f",
+            measurementId: "G-E6X2VQV0TN"
+        };
 
-        // Fetch User Data
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                const docRef = doc(db, "users", user.uid);
-                const docSnap = await getDoc(docRef);
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-                if (docSnap.exists()) {
-                    document.getElementById("username").innerText = docSnap.data().name;
-                    document.getElementById("useremail").innerText = docSnap.data().email;
-                    document.getElementById("usergi").innerText = docSnap.data().giTag; // Display GI Tag
-                } else {
-                    console.log("No user data found!");
+        // Ensure auth state is persistent
+        setPersistence(auth, browserLocalPersistence).then(() => {
+            onAuthStateChanged(auth, async (user) => {
+                if (!user) {
+                    alert("No user logged in. Please sign in.");
+                    window.location.href = "auth.html";
+                    return;
                 }
-            } else {
-                alert("User not logged in!");
-                window.location.href = "index.html";
-            }
-        });
 
-        // Logout function
-        async function logout() {
-            await signOut(auth);
-            alert("Logged out successfully!");
-            window.location.href = "index.html";
-        }
+                const uid = user.uid;
+                const userDocRef = doc(db, "users", uid); // Assuming you store user info in a "users" collection
+                const userSnap = await getDoc(userDocRef);
+
+                if (userSnap.exists()) {
+                    const data = userSnap.data();
+                    document.getElementById("profile-details").innerHTML = `
+            <p><strong>Name:</strong> ${data.name || "N/A"}</p>
+            <p><strong>Location:</strong> ${data.location || "N/A"}</p>
+            <p><strong>GI Tag:</strong> ${data.giTag || "N/A"}</p>
+          `;
+                } else {
+                    document.getElementById("profile-details").innerHTML = "<p>No profile data found.</p>";
+                }
+
+                // Fetch exhibitions registered by this user
+                const q = query(
+                    collection(db, "exhibition_registrations"),
+                    where("email", "==", user.email)
+                );
+                console.log("Signed in as:", user.email, "UID:", user.uid);
+
+
+                const querySnapshot = await getDocs(q);
+                const list = document.getElementById("exhibition-list");
+
+                if (querySnapshot.empty) {
+                    list.innerHTML = "<li>No exhibitions registered yet.</li>";
+                } else {
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        const li = document.createElement("li");
+                        li.textContent = `${data.artworkTitle} - ₹${data.price}`;
+                        list.appendChild(li);
+                    });
+                }
+            });
+        });
     </script>
 </body>
 
