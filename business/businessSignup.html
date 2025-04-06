@@ -80,12 +80,7 @@
 </head>
 
 <body>
-    <!-- Flower Decoration -->
-    <div class="flowers">
-
-        <img src="assets/tenor.gif" alt="paint GIF">
-
-    </div>
+   
 
     <!-- Business Signup Form -->
     <form id="business-signup-form">
@@ -102,14 +97,36 @@
 
         <label for="categories">Categories:</label><br>
         <div class="category-select">
-            <input type="checkbox" value="Handicrafts" id="handicrafts"> Handicrafts<br>
-            <input type="checkbox" value="Textile" id="textile"> Textile<br>
-            <input type="checkbox" value="Pottery" id="pottery"> Pottery<br>
-            <input type="checkbox" value="Paintings" id="paintings"> Paintings<br>
-            <input type="checkbox" value="Clothes" id="clothes"> Clothes<br>
-            <input type="checkbox" value="Jewelry" id="jewelry"> Jewelry<br>
-            <input type="checkbox" value="Other" id="other"> Other<br>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <input type="checkbox" id="handicrafts" value="Handicrafts">
+                <label for="handicrafts" style="margin-left: 8px;">Handicrafts</label>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <input type="checkbox" id="textile" value="Textile">
+                <label for="textile" style="margin-left: 8px;">Textile</label>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <input type="checkbox" id="pottery" value="Pottery">
+                <label for="pottery" style="margin-left: 8px;">Pottery</label>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <input type="checkbox" id="paintings" value="Paintings">
+                <label for="paintings" style="margin-left: 8px;">Paintings</label>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <input type="checkbox" id="clothes" value="Clothes">
+                <label for="clothes" style="margin-left: 8px;">Clothes</label>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <input type="checkbox" id="jewelry" value="Jewelry">
+                <label for="jewelry" style="margin-left: 8px;">Jewelry</label>
+            </div>
+            <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                <input type="checkbox" id="other" value="Other">
+                <label for="other" style="margin-left: 8px;">Other</label>
+            </div>
         </div>
+        
         <br><br>
 
         <button type="submit">Register Business</button>
