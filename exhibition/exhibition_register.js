@@ -1,5 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+
+
 
 // ✅ Firebase Config
 const firebaseConfig = {
@@ -15,8 +19,21 @@ const firebaseConfig = {
 // ✅ Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
 console.log("Firebase Initialized Successfully!");
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        console.log("User is signed in:", user.email);
+        // Allow submission logic here if needed
+    } else {
+        console.warn("User is NOT signed in. Redirecting or disabling form.");
+        alert("You must be signed in to register.");
+        // You can disable the form or redirect to login
+        // document.getElementById("registration-form").style.display = "none";
+    }
+});
+
 
 // ✅ Handle Form Submission
 document.getElementById("registration-form").addEventListener("submit", async function (e) {
