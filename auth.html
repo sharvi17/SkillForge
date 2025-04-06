@@ -55,7 +55,7 @@
                 .then((userCredential) => {
                     const user = userCredential.user;
                     localStorage.setItem("username", user.displayName || "User");
-                    window.location.href = "index.html";
+                    window.location.href = "old_index.html";
                 })
                 .catch(() => {
                     const errorMsg = document.createElement("p");
@@ -71,7 +71,7 @@
                 .then((result) => {
                     const user = result.user;
                     localStorage.setItem("username", user.displayName || "User");
-                    window.location.href = "index.html";
+                    window.location.href = "old_index.html";
                 })
                 .catch((error) => {
                     alert("Google sign-in failed: " + error.message);
