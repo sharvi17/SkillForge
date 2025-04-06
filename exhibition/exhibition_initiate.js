@@ -1,6 +1,7 @@
 // Import Firebase modules correctly
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -16,36 +17,50 @@ const firebaseConfig = {
 // Initialize Firebase and Firestore
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("createExhibition").addEventListener("click", async function () {
-        const exhibitionName = document.getElementById("exhibitionName").value;
-        const description = document.getElementById("description").value;
-        const category = document.getElementById("category").value;
-        const location = document.getElementById("location").value;
-        const fromDate = document.getElementById("fromDate").value;
-        const toDate = document.getElementById("toDate").value;
+// Wait until DOM loads
+document.addEventListener("DOMContentLoaded", () => {
+    const createBtn = document.getElementById("createExhibition");
 
-        if (!exhibitionName || !category || !location || !fromDate || !toDate) {
-            alert("Please fill in all required fields.");
+    // Make sure the user is signed in
+    onAuthStateChanged(auth, user => {
+        if (!user) {
+            alert("You must be logged in to initiate an exhibition.");
             return;
         }
 
-        try {
-            await addDoc(collection(db, "exhibitions"), {
-                exhibitionName,
-                description,
-                category,
-                location,
-                fromDate,
-                toDate,
-                createdAt: new Date()
-            });
-            alert("Exhibition created successfully!");
-            window.location.href = "exhibitions.html"; // Redirect to exhibitions page
-        } catch (error) {
-            console.error("Error adding document: ", error);
-            alert("Failed to create exhibition.");
-        }
+        createBtn.addEventListener("click", async () => {
+            const exhibitionName = document.getElementById("exhibitionName").value;
+            const description = document.getElementById("description").value;
+            const category = document.getElementById("category").value;
+            const location = document.getElementById("location").value;
+            const fromDate = document.getElementById("fromDate").value;
+            const toDate = document.getElementById("toDate").value;
+
+            if (!exhibitionName || !category || !location || !fromDate || !toDate) {
+                alert("Please fill in all required fields.");
+                return;
+            }
+
+            try {
+                await addDoc(collection(db, "exhibitions"), {
+                    exhibitionName,
+                    description,
+                    category,
+                    location,
+                    fromDate,
+                    toDate,
+                    createdBy: user.uid,
+                    createdAt: new Date()
+                });
+                alert("Exhibition created successfully!");
+                window.location.href = "exhibitions.html";
+            } catch (error) {
+                console.error("Error creating exhibition:", error);
+                alert("Failed to create exhibition.");
+            }
+        });
     });
 });
+
