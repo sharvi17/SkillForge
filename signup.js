@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             alert("Account created successfully!");
             console.log("Redirecting to home page..."); // Debugging log
-            window.location.href = "index.html";
+            window.location.href = "old_index.html";
         } catch (error) {
             alert(`Error: ${error.message}`);
         }
