@@ -43,7 +43,7 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
             email: email
         });
 
-        window.location.href = "index.html";
+        window.location.href = "old_index.html";
     } catch (error) {
         alert("Signup failed: " + error.message);
     }
