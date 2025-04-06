@@ -20,7 +20,7 @@ document.getElementById("google-login").addEventListener("click", () => {
         .then((result) => {
             const user = result.user;
             localStorage.setItem("username", user.displayName || "User");
-            window.location.href = "index.html";
+            window.location.href = "old_index.html";
         })
         .catch((error) => {
             alert("Google sign-in failed: " + error.message);
